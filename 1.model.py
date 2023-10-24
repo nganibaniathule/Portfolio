@@ -74,8 +74,12 @@ numeric_dataset = dataset[["credit_score", "age",
                            "balance", "estimated_salary", "churn"]]
 
 sns.countplot(x="churn", data=dataset, palette='hls')
-plt.title("Frequency of clients - Churned (1) vs Not Churned (0)")
+plt.title("Frequency of clients")
 plt.show()
+
+# calculate correlation between columns
+corr_matrix = numeric_dataset.corr()
+print(corr_matrix)
 
 # Visualize the data using seaborn pairplots
 sns.pairplot(numeric_dataset, hue='churn', diag_kws={'bw_method': 0.2})
