@@ -81,7 +81,7 @@ During the exploratory phase of our analysis, we gained valuable insights into t
 - Active Membership:
    - The data demonstrated that active members had a lower churn rate compared to non-active members. This distinction emphasizes the importance of customer engagement and involvement in bank services as a factor in retention.
      
-     ![credit_card](https://github.com/nganibaniathule/Portfolio/assets/129146143/4ed390d4-cd89-42af-aa33-09659b488d51)
+     ![active_member](https://github.com/nganibaniathule/Portfolio/assets/129146143/a133e19a-55c2-44b7-b539-a9aee1e362ed)
 
 
 Correlation Analysis:
