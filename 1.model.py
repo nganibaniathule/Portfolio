@@ -1,4 +1,5 @@
 # Import necessary libraries
+from matplotlib import colors
 from sklearn.metrics import accuracy_score, confusion_matrix, precision_score, recall_score, f1_score, precision_recall_curve, classification_report
 import seaborn as sns
 from sklearn.model_selection import GridSearchCV
@@ -79,7 +80,37 @@ plt.show()
 
 # calculate correlation between columns
 corr_matrix = numeric_dataset.corr()
-print(corr_matrix)
+
+# Create a custom color
+# map with blue and green colors
+colors_list = ['#FF5733', '#FFC300']
+cmap = colors.ListedColormap(colors_list)
+
+# Plot the heatmap with custom colors and annotations
+plt.imshow(corr_matrix, cmap=cmap, vmin=0, vmax=1, extent=[0, 5, 0, 5])
+for i in range(5):
+    for j in range(5):
+        plt.annotate(str(round(corr_matrix.values[i][j], 2)),
+                     xy=(j+0.25, i+0.7),
+                     ha='center', va='center', color='white')
+
+# Add colorbar
+cbar = plt.colorbar(ticks=[0, 0.5, 1])
+cbar.ax.set_yticklabels(['Low', 'Medium', 'High'])
+
+# Set plot title and axis labels
+plt.title("Correlation Matrix Of The Dataset")
+plt.xlabel("Features")
+plt.ylabel("Features")
+
+# Set tick labels
+plt.xticks(range(len(corr_matrix.columns)),
+           corr_matrix.columns, rotation=90)
+plt.yticks(range(len(corr_matrix.columns)),
+           corr_matrix.columns)
+
+# Display the plot
+plt.show()
 
 # Visualize the data using seaborn pairplots
 sns.pairplot(numeric_dataset, hue='churn', diag_kws={'bw_method': 0.2})
@@ -113,10 +144,10 @@ X_train, y_train = sm.fit_resample(X_train, y_train.ravel())
 count_0 = 0
 count_1 = 0
 for i in y_train:
-  if i == 0:
-    count_0 += 1
-  else:
-    count_1 += 1
+    if i == 0:
+        count_0 += 1
+    else:
+        count_1 += 1
 print(f"0: {count_0}")
 print(f"1: {count_1}")
 
@@ -185,7 +216,7 @@ nb.fit(X_train, y_train)
 # Important Variables
 print("Important Features: ")
 for i, column in enumerate(newDataset.drop("churn", axis=1)):
-    #print(f"Importance of feature {column}:, {nb.feature_importances_[i]}")
+    # print(f"Importance of feature {column}:, {nb.feature_importances_[i]}")
     fi = pd.DataFrame({'variable': [column], 'Feature Importance Score': [
                       nb.feature_importances_[i]]})
 
@@ -193,9 +224,10 @@ for i, column in enumerate(newDataset.drop("churn", axis=1)):
         final_fi = pd.concat([final_fi, fi], ignore_index=True)
     except:
         final_fi = fi
-        
+
 # ordering the data
-final_fi = final_fi.sort_values("Feature Importance Score", ascending=False).reset_index()
+final_fi = final_fi.sort_values(
+    "Feature Importance Score", ascending=False).reset_index()
 print(final_fi)
 
 print()
