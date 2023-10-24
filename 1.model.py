@@ -137,15 +137,12 @@ print("-------------------------------------------------------------------------
 # Print information about the Logistic Regression model
 print("Logistic Regression Model: ")
 print("------------------------------------------------------------------------------------------")
-nb = LogisticRegression(random_state=42)
+lr = LogisticRegression(random_state=42)
 
-nb.fit(X_train, y_train)
+lr.fit(X_train, y_train)
 
-# Getting the coefficients of the logistic regression model
-print("Model coefficients: ")
-print(nb.fit(X_train, y_train))
 
-y_predictions = nb.predict(X_test)
+y_predictions = lr.predict(X_test)
 print(f"Accuracy  = {round(accuracy_score(y_test, y_predictions)*100, 2)}%")
 print(f"Precision = {round(precision_score(y_test, y_predictions)*100,2)}%")
 print(f"Recall = {round(recall_score(y_test, y_predictions)*100,2)}%")
